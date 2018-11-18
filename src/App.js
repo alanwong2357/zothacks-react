@@ -8,23 +8,19 @@ import Reddit from './reddit'
 //   <h2>Your Feed</h2>
 // </div>)
 class App extends React.Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <Reddit/>
-          {/*
-          // <CompononetExample/>
-          */}
-        </header>
-      </div>
-    );
+  constructor(props)
+  {
+    super(props)
+    this.state = {data: ""}
   }
 
   componentDidMount() {
     fetch('test-data.json')
     .then(res => res.json())
-    .then(json => this.setState({ data: json }));
+    .then((json) => {
+      // console.log(json.data)
+      this.setState({ data: [...json.data] })
+    });
 
     // .then((res) => res.json())
     // .then((data) => {
@@ -32,12 +28,30 @@ class App extends React.Component {
     // })
   }
 
-  // componentDidMount() {
-  //   fetch('localhost://')
-  //     .then(response => response.json())
-  //     .then(data => this.setState({ data }));
-  // }
+  render() {
+    const data = [...this.state.data]
+    // <li style={{ backgroundColor: green; }}>
+    const testList = data.map((d,index) =>
+      (<li key={index}> {d.name} {d.price}</li> ))
+    console.log(testList)
+    console.log(this.state.data)
+    return (
+      <div className="App">
+        <header className="App-header">
+          <Reddit/>
+          <ul>
+            <div style={{backgroundColor:"blue"}}>
+              {testList}
+            </div>
+          </ul>
+          {/*
+          // <CompononetExample/>
+          */}
 
+        </header>
+      </div>
+    );
+  }
 
 }
 
