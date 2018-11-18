@@ -3,10 +3,8 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import Reddit from './reddit'
+import CredentialsForm from './credentials-form'
 
-// const CompononetExample = () => (<div>
-//   <h2>Your Feed</h2>
-// </div>)
 class App extends React.Component {
   constructor(props)
   {
@@ -15,38 +13,33 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch('test-data.json')
+    fetch('http://127.0.0.1:5000/main/process')
     .then(res => res.json())
     .then((json) => {
-      // console.log(json.data)
+      console.log(json.data)
       this.setState({ data: [...json.data] })
     });
-
-    // .then((res) => res.json())
-    // .then((data) => {
-    //   console.log('data:', data);
-    // })
   }
 
   render() {
     const data = [...this.state.data]
-    // <li style={{ backgroundColor: green; }}>
     const testList = data.map((d,index) =>
-      (<li key={index}> {d.name} {d.price}</li> ))
+      // (<p style="text-align:left" key={index}>{d.name} {d.content}</p>))
+      (<p key={index}> {d.name}{d.time}: <br/>{d.content}</p>))
     console.log(testList)
     console.log(this.state.data)
     return (
       <div className="App">
         <header className="App-header">
+          <h1>UniSocial</h1>
+          <div>
+              <h3>Enter your Login Information:</h3>
+              <CredentialsForm />
+            </div>
           <Reddit/>
-          <ul>
-            <div style={{backgroundColor:"blue"}}>
+            <div class="container" style={{backgroundColor:"clear"}}>
               {testList}
             </div>
-          </ul>
-          {/*
-          // <CompononetExample/>
-          */}
 
         </header>
       </div>

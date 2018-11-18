@@ -35,3 +35,17 @@
   backgroundColor: green;
   font-color: "black";
 }
+
+p {
+  text-align:left;
+  background-color: dodgerblue;
+  padding: 1rem 1rem 1rem 1rem;
+  /* box-shadow: 5px 10px; */
+  border-radius: 2rem;
+  margin: 0 10rem 2rem 10rem;
+  width: auto;
+}
+
+h3 {
+  font-size: 1.3rem;
+}
